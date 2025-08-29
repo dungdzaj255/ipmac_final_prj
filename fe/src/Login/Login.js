@@ -29,8 +29,8 @@ function Login({ onNavigate }) {
                 const data = await response.json();
 
                 // ✅ Lưu thông tin vào localStorage
-                localStorage.setItem('user', JSON.stringify(data.user));
-
+                localStorage.setItem('user', JSON.stringify(data));
+                console.log(localStorage.getItem('user'));
                 alert('Đăng nhập thành công!');
                 navigate('/');
             } else {
