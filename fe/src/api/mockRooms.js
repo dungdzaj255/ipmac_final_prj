@@ -8,6 +8,8 @@ export const mockRooms = [
         beds: 1,
         capacity: 2,
         rating: 4.5,
+        shortDesc: "1 giường · 2 khách, view thành phố, bữa sáng ngon",
+        status: "Available",
     },
     {
         id: 2,
@@ -17,6 +19,8 @@ export const mockRooms = [
         beds: 2,
         capacity: 4,
         rating: 4.7,
+        shortDesc: "2 giường · 4 khách, căn góc rộng, gần trung tâm",
+        status: "Available",
     },
     {
         id: 3,
@@ -26,6 +30,8 @@ export const mockRooms = [
         beds: 1,
         capacity: 2,
         rating: 4.2,
+        shortDesc: "1 giường · 2 khách, hồ bơi ngoài trời, spa thư giãn",
+        status: "Available",
     },
     {
         id: 4,
@@ -35,6 +41,8 @@ export const mockRooms = [
         beds: 2,
         capacity: 2,
         rating: 4.1,
+        shortDesc: "2 giường · 2 khách, phù hợp công tác, gần khu tài chính",
+        status: "Available",
     },
     {
         id: 5,
@@ -44,6 +52,8 @@ export const mockRooms = [
         beds: 1,
         capacity: 3,
         rating: 4.9,
+        shortDesc: "1 giường · 3 khách, view biển, đồ ăn ngon, bar bãi biển",
+        status: "Available",
     },
     {
         id: 6,
@@ -53,5 +63,7 @@ export const mockRooms = [
         beds: 1,
         capacity: 2,
         rating: 3.9,
+        shortDesc: "1 giường · 2 khách, ban công hướng biển, gần chợ đêm",
+        status: "Available",
     },
 ];
