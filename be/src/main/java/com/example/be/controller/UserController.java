@@ -12,6 +12,7 @@ import java.net.http.HttpResponse;
 
 @RestController
 @RequestMapping("/api/users")
+@CrossOrigin("*")
 public class UserController {
     @Autowired
     private UserService userService;
