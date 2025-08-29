@@ -1,0 +1,116 @@
+/* Căn giữa toàn bộ form */
+.register-wrapper {
+  min-height: 100vh; /* Chiều cao toàn màn hình */
+  display: flex;
+  justify-content: center; /* Căn giữa theo chiều ngang */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  background-color: #f0f4f8; /* Màu nền dịu nhẹ */
+  padding: 20px;
+}
+
+/* Cập nhật chiều rộng của form */
+.register-form {
+  background: white;
+  padding: 40px 35px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Cải thiện bóng đổ */
+  width: 100%;
+  max-width: 500px; /* Chiều rộng tối đa của form */
+  box-sizing: border-box;
+  text-align: center; /* Căn giữa nội dung form */
+  font-family: Arial, sans-serif;
+}
+
+/* Tiêu đề "Khách Sạn Mùa Thu" nháy màu RGB */
+.register-heading h1 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 700;
+  color: #333; /* Màu đen cho tiêu đề */
+  animation: rgbBlink 3s infinite; /* Đổi màu liên tục */
+}
+
+/* Tạo hiệu ứng nháy màu RGB */
+@keyframes rgbBlink {
+  0% {
+    color: rgb(255, 0, 0); /* Đỏ */
+  }
+  33% {
+    color: rgb(0, 255, 0); /* Xanh lá */
+  }
+  66% {
+    color: rgb(0, 0, 255); /* Xanh dương */
+  }
+  100% {
+    color: rgb(255, 0, 0); /* Đỏ */
+  }
+}
+
+/* Dòng mô tả dưới tiêu đề */
+.register-heading p {
+  color: #666;
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* Các input */
+.register-form input[type="text"],
+.register-form input[type="tel"],
+.register-form input[type="password"],
+.register-form input[type="email"] {  /* Thêm vào input email */
+  width: 100%;
+  padding: 12px 14px;
+  margin: 12px 0; /* Thêm khoảng cách giữa các input */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  box-sizing: border-box;
+  background-color: #fafafa; /* Màu nền cho input */
+}
+
+/* Khi input được focus */
+.register-form input[type="text"]:focus,
+.register-form input[type="tel"]:focus,
+.register-form input[type="password"]:focus,
+.register-form input[type="email"]:focus {  /* Focus cho email */
+  border-color: #28a745; /* Đổi màu viền khi focus */
+  outline: none;
+}
+
+/* Nút đăng ký */
+button[type="submit"] {
+  width: 100%;
+  background-color: #28a745; /* Màu nút xanh */
+  border: none;
+  padding: 14px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 6px;
+  text-transform: uppercase;
+  margin-top: 15px; /* Khoảng cách giữa nút đăng ký và các phần khác */
+  font-weight: 600;
+}
+
+button[type="submit"]:hover {
+  background-color: #218838; /* Màu nút khi hover */
+}
+
+/* Dòng đăng nhập */
+.login-text {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.login-text a {
+  color: #28a745;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.login-text a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
