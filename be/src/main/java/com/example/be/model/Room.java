@@ -28,11 +28,10 @@ public class Room {
 
     private Boolean available;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+//    @ManyToOne
+//    @JoinColumn(name = "user_id")
+//    private User user;
 
-    @ManyToMany(mappedBy = "rooms")
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BookingOrder> bookingOrders;
-
 }

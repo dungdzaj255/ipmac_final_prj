@@ -29,11 +29,7 @@ public class BookingOrder {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToMany
-    @JoinTable(
-            name = "booking_order_rooms",
-            joinColumns = @JoinColumn(name = "booking_order_id"),
-            inverseJoinColumns = @JoinColumn(name = "room_id")
-    )
-    private List<Room> rooms;
+    @ManyToOne
+    @JoinColumn(name = "room_id")
+    private Room room;
 }
