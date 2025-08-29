@@ -1,21 +1,49 @@
 import React, { useState } from 'react';
 import './Login.css';
+import {useNavigate} from "react-router-dom";
 
 function Login({ onNavigate }) {
-  const [email, setEmail] = useState('');
+    const navigate = useNavigate();
+  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [remember, setRemember] = useState(true);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Thay bằng API đăng nhập thực tế
-    console.log({ email, password, remember });
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-    // Giả sử đăng nhập thành công
-    onNavigate('home');
-  };
+        const payload = {
+            phone,
+            password
+        };
 
-  return (
+        try {
+            const response = await fetch('http://localhost:8080/api/users/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+
+                // ✅ Lưu thông tin vào localStorage
+                localStorage.setItem('user', JSON.stringify(data.user));
+
+                alert('Đăng nhập thành công!');
+                navigate('/');
+            } else {
+                const errorData = await response.json();
+                alert(`Lỗi: ${errorData.message || 'Đăng nhập thất bại'}`);
+            }
+        } catch (error) {
+            alert(`Lỗi kết nối server: ${error.message}`);
+        }
+    };
+
+
+    return (
     <div className="login-wrapper">
       <form className="login-form" onSubmit={handleSubmit}>
         <div className="login-heading">
@@ -24,10 +52,10 @@ function Login({ onNavigate }) {
         </div>
 
         <input
-          type="email"
+          type="text"
           placeholder="Số Điện Thoai"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
           required
         />
         <input
@@ -52,16 +80,6 @@ function Login({ onNavigate }) {
 
         <button type="submit" className="btn-primary">SIGN IN</button>
 
-        <p className="register-text">
-          Not a member?{' '}
-          <button
-            type="button"
-            className="link-button"
-            onClick={() => onNavigate('register')}
-          >
-            Register
-          </button>
-        </p>
       </form>
     </div>
   );
