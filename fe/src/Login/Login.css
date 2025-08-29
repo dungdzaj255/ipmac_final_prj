@@ -1,0 +1,124 @@
+/* Căn giữa toàn bộ form */
+.login-wrapper {
+  min-height: 100vh; /* Chiều cao toàn màn hình */
+  display: flex;
+  justify-content: center; /* Căn giữa theo chiều ngang */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  background-color: ; /* Màu nền dịu nhẹ */
+  padding: 20px; /* Padding để không bị sát viền */
+}
+
+.login-form {
+  background: white;
+  padding: 40px 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  width: 350px; /* Đặt width cố định cho form */
+  box-sizing: border-box;
+  text-align: center; /* Căn giữa nội dung form */
+}
+
+/* Tiêu đề "Khách Sạn Mùa Thu" nháy màu RGB */
+.login-heading h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  animation: rgbBlink 3s infinite; /* Đổi màu liên tục */
+}
+
+/* Tạo hiệu ứng nháy màu RGB */
+@keyframes rgbBlink {
+  0% {
+    color: rgb(255, 0, 0); /* Đỏ */
+  }
+  33% {
+    color: rgb(0, 255, 0); /* Xanh lá */
+  }
+  66% {
+    color: rgb(0, 0, 255); /* Xanh dương */
+  }
+  100% {
+    color: rgb(255, 0, 0); /* Đỏ */
+  }
+}
+
+/* Dòng mô tả dưới tiêu đề */
+.login-heading p {
+  color: #666;
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Các input */
+.login-form input[type="email"],
+.login-form input[type="password"] {
+  width: 100%;
+  padding: 12px 14px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+/* Các tùy chọn "Remember me" và "Forgot password?" */
+.login-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  margin-bottom: 15px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.login-options label {
+  cursor: pointer;
+}
+
+.forgot-link {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+}
+
+/* Nút đăng nhập */
+button[type="submit"] {
+  width: 100%;
+  background-color: #28a745; /* Màu nút xanh */
+  border: none;
+  padding: 14px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 6px;
+  text-transform: uppercase;
+  margin-top: 5px;
+  font-weight: 600;
+}
+
+button[type="submit"]:hover {
+  background-color: #218838; /* Màu nút khi hover */
+}
+
+/* Dòng đăng ký */
+.register-text {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.register-text a {
+  color: #28a745;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.register-text a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
