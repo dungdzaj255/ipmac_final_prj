@@ -36,4 +36,16 @@ public class UserServiceImpl implements UserService {
         user.setPassword(hashedPassword);
         return userRepository.save(user);
     }
+
+    @Override
+    public void initAdmin() {
+        if (userRepository.findByPhone("admin") == null) {
+            User user = new User();
+            user.setPhone("admin");
+            String hashedPassword = new BCryptPasswordEncoder().encode("admin");
+            user.setPassword(hashedPassword);
+            user.setIsAdmin(true);
+            userRepository.save(user);
+        }
+    }
 }

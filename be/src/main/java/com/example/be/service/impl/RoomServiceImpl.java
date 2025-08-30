@@ -5,8 +5,15 @@ import com.example.be.repo.RoomRepository;
 import com.example.be.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class RoomServiceImpl implements RoomService {
@@ -24,23 +31,47 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public Room createRoom(Room room) {
+    public Room createRoom(Room room, MultipartFile image) {
+        if (image != null && !image.isEmpty()) {
+            try {
+                saveImageFile(image, room);
+            } catch (IOException e) {
+                throw new RuntimeException("Failed to save image", e);
+            }
+        }
         return roomRepository.save(room);
     }
 
     @Override
-    public Room updateRoom(Long id, Room roomDetails) {
+    public Room updateRoom(Long id, Room updatedRoom, MultipartFile image) {
         Room existingRoom = roomRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Room not found"));
 
-        existingRoom.setRoomName(roomDetails.getRoomName());
-        existingRoom.setPricePerDay(roomDetails.getPricePerDay());
-        existingRoom.setImage(roomDetails.getImage());
-        existingRoom.setAvailable(roomDetails.getAvailable());
-        existingRoom.setDescription(roomDetails.getDescription());
+        existingRoom.setRoomName(updatedRoom.getRoomName());
+        existingRoom.setPricePerDay(updatedRoom.getPricePerDay());
+        existingRoom.setDescription(updatedRoom.getDescription());
+
+        if (image != null && !image.isEmpty()) {
+            try {
+                saveImageFile(image, existingRoom);
+            } catch (IOException e) {
+                throw new RuntimeException("Failed to update image", e);
+            }
+        }
 
         return roomRepository.save(existingRoom);
     }
+
+    private void saveImageFile(MultipartFile image, Room existingRoom) throws IOException {
+        String uploadDir = "fe/public/uploads/";
+        String fileName = UUID.randomUUID() + "_" + image.getOriginalFilename();
+        Path filePath = Paths.get(uploadDir + fileName);
+        Files.createDirectories(filePath.getParent());
+        Files.copy(image.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+        existingRoom.setImage("/uploads/" + fileName);
+    }
+
 
     @Override
     public void deleteRoom(Long id) {

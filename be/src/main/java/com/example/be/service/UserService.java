@@ -8,4 +8,6 @@ public interface UserService {
     User login(String phone, String password);
 
     User register(User user);
+
+    void initAdmin();
 }

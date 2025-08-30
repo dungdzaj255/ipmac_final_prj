@@ -4,8 +4,10 @@ import com.example.be.model.Room;
 import com.example.be.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -35,18 +37,26 @@ public class RoomController {
     }
 
     // Tạo phòng mới
-    @PostMapping
-    public ResponseEntity<Room> createRoom(@RequestBody Room room) {
-        Room newRoom = roomService.createRoom(room);
+    @PostMapping(consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+    public ResponseEntity<Room> createRoom(
+            @RequestPart("room") Room room,
+            @RequestPart(value = "image", required = false) MultipartFile image) {
+        Room newRoom = roomService.createRoom(room, image);
         return ResponseEntity.status(HttpStatus.CREATED).body(newRoom);
     }
 
+
     // Cập nhật phòng
-    @PutMapping("/{id}")
-    public ResponseEntity<Room> updateRoom(@PathVariable Long id, @RequestBody Room roomDetails) {
-        Room updatedRoom = roomService.updateRoom(id, roomDetails);
+    @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Room> updateRoom(
+            @PathVariable Long id,
+            @RequestPart("room") Room roomDetails,
+            @RequestPart(value = "image", required = false) MultipartFile image) {
+
+        Room updatedRoom = roomService.updateRoom(id, roomDetails, image);
         return ResponseEntity.ok(updatedRoom);
     }
+
 
     // Xóa phòng
     @DeleteMapping("/{id}")

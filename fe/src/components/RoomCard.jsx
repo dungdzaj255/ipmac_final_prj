@@ -68,6 +68,7 @@ export default function RoomCard({room}) {
         try {
             await bookingApi.create(payload);
             setFinalMessage("Đặt phòng thành công!");
+            setIsModalOpen(false);
         } catch (e) {
             setFinalMessage("Đặt phòng thất bại. Vui lòng thử lại.");
         } finally {
@@ -94,7 +95,7 @@ export default function RoomCard({room}) {
                     <button
                         className="btn btn-primary btn-cta"
                         onClick={handleOpenModal}
-                        disabled={!user || !available || submitting}
+                        disabled={!user || user.isAdmin || !available || submitting}
                     >
                         Order Now
                     </button>

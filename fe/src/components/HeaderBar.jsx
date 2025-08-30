@@ -1,5 +1,5 @@
-import { useAuth } from '../context/AuthContext';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 export default function HeaderBar() {
     const { user, logout } = useAuth();
@@ -7,12 +7,20 @@ export default function HeaderBar() {
     return (
         <div className="topbar">
             <div className="topbar-inner container">
-                <a className="brand btn" href={"/"}>Khách Sạn Mùa Thu</a>
+                <Link className="brand btn" to="/">Khách Sạn Mùa Thu</Link>
 
                 <div className="topbar-actions">
                     {user ? (
                         <>
-                            <span className="welcome-text brand">Xin chào, {user.fullName}</span>
+                            {user.isAdmin ? (
+                                <Link to="/admin" className="btn btn-warning">
+                                    Admin Dashboard
+                                </Link>
+                            ) : (
+                                <span className="welcome-text brand">
+                                    Xin chào, {user.fullName}
+                                </span>
+                            )}
                             <button onClick={logout} className="btn btn-outline">
                                 Logout
                             </button>

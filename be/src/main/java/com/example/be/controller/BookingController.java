@@ -33,7 +33,7 @@ public class BookingController {
         }
     }
 
-    @PostMapping(consumes = {"application/json", "application/json;charset=UTF-8"})
+    @PostMapping()
     public ResponseEntity<?> createBooking(@RequestBody BookingOrder bookingOrder) {
         try {
             BookingOrder newBooking = bookingService.createBookingOrder(bookingOrder);
