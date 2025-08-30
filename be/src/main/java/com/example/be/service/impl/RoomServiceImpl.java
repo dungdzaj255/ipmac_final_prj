@@ -3,6 +3,7 @@ package com.example.be.service.impl;
 import com.example.be.model.Room;
 import com.example.be.repo.RoomRepository;
 import com.example.be.service.RoomService;
+import com.example.be.utils.SaveFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,7 +35,8 @@ public class RoomServiceImpl implements RoomService {
     public Room createRoom(Room room, MultipartFile image) {
         if (image != null && !image.isEmpty()) {
             try {
-                saveImageFile(image, room);
+                String imgDr = SaveFile.saveFile(image);
+                room.setImage(imgDr);
             } catch (IOException e) {
                 throw new RuntimeException("Failed to save image", e);
             }
@@ -53,7 +55,8 @@ public class RoomServiceImpl implements RoomService {
 
         if (image != null && !image.isEmpty()) {
             try {
-                saveImageFile(image, existingRoom);
+                String imgDr = SaveFile.saveFile(image);
+                existingRoom.setImage(imgDr);
             } catch (IOException e) {
                 throw new RuntimeException("Failed to update image", e);
             }
@@ -61,17 +64,6 @@ public class RoomServiceImpl implements RoomService {
 
         return roomRepository.save(existingRoom);
     }
-
-    private void saveImageFile(MultipartFile image, Room existingRoom) throws IOException {
-        String uploadDir = "fe/public/uploads/";
-        String fileName = UUID.randomUUID() + "_" + image.getOriginalFilename();
-        Path filePath = Paths.get(uploadDir + fileName);
-        Files.createDirectories(filePath.getParent());
-        Files.copy(image.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-
-        existingRoom.setImage("/uploads/" + fileName);
-    }
-
 
     @Override
     public void deleteRoom(Long id) {
