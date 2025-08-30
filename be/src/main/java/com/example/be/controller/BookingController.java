@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -32,11 +33,12 @@ public class BookingController {
         }
     }
 
-    @PostMapping
+    @PostMapping(consumes = {"application/json", "application/json;charset=UTF-8"})
     public ResponseEntity<?> createBooking(@RequestBody BookingOrder bookingOrder) {
         try {
             BookingOrder newBooking = bookingService.createBookingOrder(bookingOrder);
-            return ResponseEntity.status(HttpStatus.CREATED).body(newBooking);
+            bookingOrder.getUser().getBookingOrders().clear();
+            return ResponseEntity.status(HttpStatus.OK).body(newBooking);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
