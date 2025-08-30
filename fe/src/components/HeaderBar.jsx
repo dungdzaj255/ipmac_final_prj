@@ -1,28 +1,19 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import {Link} from "react-router-dom";
 
 export default function HeaderBar() {
-    const navigate = useNavigate();
-    const storedUser = localStorage.getItem('user');
-    const user = storedUser ? JSON.parse(storedUser) : null;
-
-    const handleLogout = () => {
-        localStorage.removeItem('user');
-        navigate('/login');
-    };
+    const { user, logout } = useAuth();
 
     return (
         <div className="topbar">
             <div className="topbar-inner container">
-                <Link to="/" className="brand" aria-label="Về trang chủ">
-                    Khách Sạn Mùa Thu
-                </Link>
+                <a className="brand btn" href={"/"}>Khách Sạn Mùa Thu</a>
 
                 <div className="topbar-actions">
                     {user ? (
                         <>
-                            <span className="welcome-text">Xin chào, {user.fullName}</span>
-                            <button onClick={handleLogout} className="btn btn-outline">
+                            <span className="welcome-text brand">Xin chào, {user.fullName}</span>
+                            <button onClick={logout} className="btn btn-outline">
                                 Logout
                             </button>
                         </>
